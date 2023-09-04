@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -15,7 +16,7 @@ export class RegistroPage implements OnInit {
 
   formularioRegistro: FormGroup; // Cambiado el nombre a formularioRegistro
 
-  constructor(public fb: FormBuilder) {
+  constructor(public fb: FormBuilder, public alertController: AlertController) {
     this.formularioRegistro = this.fb.group({ // Cambiado el nombre de la variable
       'nombre': new FormControl("", Validators.required),
       'contraseña': new FormControl("", Validators.required),
@@ -27,8 +28,21 @@ export class RegistroPage implements OnInit {
     // Código de inicialización aquí
   }
 
-  guardar() {
-    // Lógica para guardar el registro
-    // Puedes implementar aquí lo que sucede cuando se hace clic en el botón de registro
+   async guardar() {
+    var f = this.formularioRegistro.value;
+    if(this.formularioRegistro.invalid){
+      const alert = await this.alertController.create({
+        header: 'Datos Incompletos',
+        message: 'Ingrese todos los campos',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+    }
+    var usuario = {
+      nombre: f.nombre,
+      contraseña: f.contraseña,
   }
+  localStorage.setItem('usuario', JSON.stringify(usuario));
+}
 }
