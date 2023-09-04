@@ -1,24 +1,23 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AlertController, IonicModule } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
-@NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-
+@Component({
+  selector: 'app-recuperar',
+  templateUrl: './recuperar.page.html',
+  styleUrls: ['./recuperar.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule,FormsModule,ReactiveFormsModule],
 })
-export class RecuperarPageModule {}
 export class RecuperarPage {
   formularioLogin: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private navCtrl: NavController
   ) {
     this.formularioLogin = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
@@ -46,5 +45,10 @@ export class RecuperarPage {
       buttons: ['Aceptar'],
     });
     await alert.present();
+  }
+
+  volver() {
+    // Redirige de vuelta a la página de inicio de sesión
+    this.navCtrl.navigateBack('/login');
   }
 }
