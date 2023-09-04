@@ -3,13 +3,14 @@ import { AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
   styleUrls: ['./recuperar.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [IonicModule, CommonModule,FormsModule,ReactiveFormsModule,RouterLink],
 })
 export class RecuperarPage {
   formularioLogin: FormGroup;
