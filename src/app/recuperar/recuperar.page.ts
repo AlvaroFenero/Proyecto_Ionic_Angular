@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-@Component({
-  selector: 'app-recuperar',
-  templateUrl: './recuperar.page.html',
-  styleUrls: ['./recuperar.page.scss'],
+@NgModule({
+  imports: [
+    CommonModule,
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+
 })
+export class RecuperarPageModule {}
 export class RecuperarPage {
   formularioLogin: FormGroup;
 
@@ -18,10 +24,8 @@ export class RecuperarPage {
       correo: ['', [Validators.required, Validators.email]],
     });
   }
-  enviarCorreo() {
-    // Tu lógica para enviar el correo aquí
-  }
-  enviar(): void {
+
+  enviar() {
     if (this.formularioLogin.invalid) {
       this.mostrarAlerta('Error', 'Ingrese un correo válido');
       return;
@@ -32,10 +36,7 @@ export class RecuperarPage {
 
     // Simulación de envío de correo (reemplaza esto con tu lógica real)
     // En este ejemplo, mostramos una alerta para demostrar que se enviaría el correo.
-    this.mostrarAlerta(
-      'Correo Enviado',
-      `Se ha enviado un correo a ${correo} con instrucciones para recuperar la contraseña.`
-    );
+    this.mostrarAlerta('Correo Enviado', `Se ha enviado un correo a ${correo} con instrucciones para recuperar la contraseña.`);
   }
 
   async mostrarAlerta(titulo: string, mensaje: string) {

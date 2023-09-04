@@ -10,7 +10,7 @@ import { LoginPage } from '../login/login.page';
   templateUrl: './mostrar.page.html',
   styleUrls: ['./mostrar.page.scss'],
   standalone: true,
-  imports: [IonicModule], 
+  imports: [IonicModule , RouterLink], 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MostrarPage implements OnInit {
