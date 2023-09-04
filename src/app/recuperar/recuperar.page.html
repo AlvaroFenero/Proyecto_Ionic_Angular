@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Recuperar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingrese sus datos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioLogin">
+        <ion-item>
+          <ion-label class="floating" position="floating">Correo</ion-label>
+          <ion-input formControlName="correo"></ion-input>
+        </ion-item>
+      </form>
+      <br>
+      <ion-button class="button-animation" (click)="enviarCorreo()">
+        Enviar información a su correo
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

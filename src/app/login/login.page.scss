@@ -1,0 +1,20 @@
+/*animacion botones inicio*/
+
+.button-animation {
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  }
+  
+  .button-animation:hover {
+    transform: scale(1.2);
+    background-color: #571a59; 
+    color: rgb(255, 255, 255);
+  }
+
+ /* Animación para ion-label */
+ ion-card.animated {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  ion-card.animated:hover {
+    transform: scale(1.2); /* Escala el card al pasar el mouse */
+  }

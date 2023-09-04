@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button class="button-animation" [Link]="['/login']">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mostrar Datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label class="custom-font">
+        <ion-icon name="person" slot="start"></ion-icon>
+        Nombre
+      </ion-label>
+      <ion-note slot="end" class="custom-font">{{ usuario.nombre }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label class="custom-font">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        Correo
+      </ion-label>
+      <ion-note slot="end" class="custom-font">{{ usuario.correo }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label class="custom-font">
+        <ion-icon name="school" slot="start"></ion-icon>
+        Carrera
+      </ion-label>
+      <ion-note slot="end" class="custom-font">{{ usuario.carrera }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

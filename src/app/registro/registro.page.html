@@ -1,36 +1,41 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Registro</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioRegistro" (keyup.enter)="guardar()">
+      <form [formGroup]="formularioRegistro">
         <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
+          <ion-label class="floating" position="floating">Nombre</ion-label>
           <ion-input formControlName="nombre"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
+          <ion-label class="floating" position="floating">Correo Electrónico</ion-label>
+          <ion-input formControlName="correo" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="floating" position="floating">Carrera</ion-label>
+          <ion-input formControlName="carrera"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="floating" position="floating">Contraseña</ion-label>
           <ion-input formControlName="contraseña" type="password"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-label class="floating" position="floating">Confirmación de Contraseña</ion-label>
           <ion-input formControlName="confirmacionContraseña" type="password"></ion-input>
         </ion-item>
       </form>
       <br>
-      <ion-button (click)="guardar()">
+      <ion-button class="button-animation" (click)="guardar()">
         Registrarse
       </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
-
