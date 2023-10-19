@@ -1,3 +1,20 @@
 .custom-font {
     font-size: 20px; /* Elige el tamaño de fuente deseado */
   }
+
+  /* Animacion para card del Login */
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Aplica la animación a la tarjeta */
+.animated-card {
+  animation: slide-in 2.0s ease;
+}

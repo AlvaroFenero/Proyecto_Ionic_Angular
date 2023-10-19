@@ -31,11 +31,8 @@ export class RecuperarPage {
       return;
     }
 
-    // Aquí puedes agregar la lógica para enviar la información de recuperación de contraseña al correo
     const correo = this.formularioLogin.value.correo;
 
-    // Simulación de envío de correo (reemplaza esto con tu lógica real)
-    // En este ejemplo, mostramos una alerta para demostrar que se enviaría el correo.
     this.mostrarAlerta('Correo Enviado', `Se ha enviado un correo a ${correo} con instrucciones para recuperar la contraseña.`);
   }
 
@@ -49,7 +46,6 @@ export class RecuperarPage {
   }
 
   volver() {
-    // Redirige de vuelta a la página de inicio de sesión
     this.navCtrl.navigateBack('/login');
   }
 }

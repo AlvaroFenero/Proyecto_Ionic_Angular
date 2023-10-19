@@ -1,20 +1,39 @@
-/*animacion botones inicio*/
 
-.button-animation {
-    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
-  }
-  
-  .button-animation:hover {
-    transform: scale(1.2);
-    background-color: #571a59; 
-    color: rgb(255, 255, 255);
-  }
+/*Hipervinculo Recuperar contraseña*/
+.link-style {
+  color: blue; 
+  text-decoration: underline;
+  cursor: pointer; 
+}
 
- /* Animación para ion-label */
- ion-card.animated {
-    transition: transform 0.3s ease-in-out;
+
+/* Centrar el boton ENTRAR*/
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+  /* Estilos para el botón "Entrar" */
+.button-container {
+  margin-top: 20px; /* Espacio adicional desde la parte superior */
+}
+
+/* Animacion para card del Login */
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  
-  ion-card.animated:hover {
-    transform: scale(1.2); /* Escala el card al pasar el mouse */
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+/* Aplica la animación a la tarjeta */
+.animated-card {
+  animation: slide-in 2.0s ease;
+}

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterLink, Routes } from '@angular/router';
-import { LoginPage } from '../login/login.page';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mostrar',
@@ -14,11 +12,11 @@ import { LoginPage } from '../login/login.page';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MostrarPage implements OnInit {
-  usuario: any; // Cambiado el nombre a "usuario" para reflejar que contiene un solo usuario
+  usuario: any;
 
   constructor() {
-    const usuarioString = localStorage.getItem('usuario'); // Cambiado a "usuario"
-    this.usuario = usuarioString ? JSON.parse(usuarioString) : null; // Cambiado a "usuario"
+    const usuarioString = localStorage.getItem('usuario'); 
+    this.usuario = usuarioString ? JSON.parse(usuarioString) : null;
   }
 
   ngOnInit() {}

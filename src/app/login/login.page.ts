@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnimationController, IonicModule } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -12,10 +12,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, RouterLink ,NgIf,],
 })
 export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
+  showLoginCard: boolean = false;
+  showFooter = false;
+
+
 
   constructor(
     public fb: FormBuilder,
@@ -24,13 +28,12 @@ export class LoginPage implements OnInit {
     private animationCtrl: AnimationController
   ) {
     this.formularioLogin = this.fb.group({
-      correo: new FormControl('', Validators.required),
+      correo: new FormControl('', [Validators.required, Validators.email]),
       contraseña: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit() {
-    // Código de inicialización aquí
   }
 
   async ingresar() {
@@ -42,7 +45,7 @@ export class LoginPage implements OnInit {
 
       if (usuario.correo == f.correo && usuario.contraseña == f.contraseña) {
         console.log('Bienvenido');
-        // Redirigir a la página "mostrar" después de un inicio de sesión exitoso
+        
         this.router.navigate(['/mostrar']);
       } else {
         const alert = await this.alertController.create({
@@ -50,10 +53,9 @@ export class LoginPage implements OnInit {
           message: 'Los datos ingresados no son válidos',
           buttons: ['Aceptar'],
         });
-        await alert.present();
+        await alert.present(); 
       }
     } else {
-      // No se encontró usuario registrado
       const alert = await this.alertController.create({
         header: 'Usuario no registrado',
         message:
@@ -70,7 +72,6 @@ export class LoginPage implements OnInit {
             text: 'Registrarse',
             handler: () => {
               console.log('El usuario eligió registrarse');
-              // Aquí puedes redirigir al usuario a la página de registro
               this.router.navigate(['/registro']);
             },
           },

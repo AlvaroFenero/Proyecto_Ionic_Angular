@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AnimationController, IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router'; // Importa Router correctamente
 import { AlertController } from '@ionic/angular';
@@ -22,14 +22,14 @@ export class RegistroPage implements OnInit {
     this.formularioRegistro = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'correo': new FormControl("", [Validators.required, Validators.email]),
-      'carrera': new FormControl("", Validators.required),
+      'curso': new FormControl("", Validators.required),
       'contraseña': new FormControl("", Validators.required),
       'confirmacionContraseña': new FormControl("", Validators.required),
     });
   }
 
   ngOnInit() {
-    // Código de inicialización aquí
+
   }
 
   async guardar() {
@@ -48,11 +48,11 @@ export class RegistroPage implements OnInit {
     var usuario = {
       correo: f.correo,
       nombre: f.nombre,
-      carrera: f.carrera,
+      curso: f.curso,
       contraseña: f.contraseña,
     }
   
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    this.router.navigate(['/login']); // Navega a la página de inicio después de guardar
+    this.router.navigate(['/login']);
   }
 }

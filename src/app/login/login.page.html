@@ -5,9 +5,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card-content>
+    <div class="logo-container" style="text-align: center;">
+      <img src="assets/Logo_2.png" alt="Logo de la aplicación" style="width: 250px; height: 250px;">
+    </div>
+
+    <!-- Primera parte: Mostrar boton entrar -->
+    <div class="button-container" *ngIf="!showLoginCard">
+      <ion-button class="button-animation" (click)="showLoginCard = true">
+        Entrar
+      </ion-button>
+    </div>
+  </ion-card-content>
+
+  <!-- Segunda parte: Mostrando la card con los datos-->
+  <ion-card *ngIf="showLoginCard" class="animated-card">
     <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
+      <ion-card-title>Ingrese sus datos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="formularioLogin">
@@ -25,15 +39,16 @@
         Ingresar
       </ion-button>
       <div class="recuperar-contrasena">
-        <a (click)="recuperarContrasena()">Recuperar contraseña</a>
+        <a class="link-style" (click)="recuperarContrasena()">Recuperar contraseña</a>
       </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="showLoginCard" class="animated-card">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button class="button-animation" [routerLink]="['/registro']">Registrarse</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+

@@ -7,8 +7,9 @@
     </ion-buttons>
     <ion-title>Mostrar Datos</ion-title>
   </ion-toolbar>
-</ion-header>
-<ion-content>
+
+<ion-card class="animated-card">
+<ion-card-content>
   <ion-list>
     <ion-item>
       <ion-label class="custom-font">
@@ -27,9 +28,11 @@
     <ion-item>
       <ion-label class="custom-font">
         <ion-icon name="school" slot="start"></ion-icon>
-        Carrera
+        Curso
       </ion-label>
-      <ion-note slot="end" class="custom-font">{{ usuario.carrera }}</ion-note>
+      <ion-note slot="end" class="custom-font">{{ usuario.curso }}</ion-note>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-card-content>
+</ion-card>
+</ion-header>
