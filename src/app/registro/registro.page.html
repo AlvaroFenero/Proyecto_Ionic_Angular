@@ -17,16 +17,20 @@
     <ion-card-content>
       <form [formGroup]="formularioRegistro">
         <ion-item>
-          <ion-label class="floating" position="floating">Nombre</ion-label>
-          <ion-input formControlName="nombre"></ion-input>
+          <ion-label class="floating" position="floating">Rut: </ion-label>
+          <ion-input formControlName="rut"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Correo Electrónico</ion-label>
-          <ion-input formControlName="correo" type="email"></ion-input>
+          <ion-label class="floating" position="floating">Nombre: </ion-label>
+          <ion-input formControlName="nombre" type="email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Curso</ion-label>
-          <ion-input formControlName="curso"></ion-input>
+          <ion-label class="floating" position="floating">Apellido: </ion-label>
+          <ion-input formControlName="apellido"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="floating" position="floating">Correo: </ion-label>
+          <ion-input formControlName="correo"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="floating" position="floating">Contraseña</ion-label>
@@ -35,6 +39,14 @@
         <ion-item>
           <ion-label class="floating" position="floating">Confirmación de Contraseña</ion-label>
           <ion-input formControlName="confirmacionContraseña" type="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label class="floating" position="floating">Tipo Usuario</ion-label>
+          <ion-select formControlName="tipo_usuario">
+            <ion-select-option value="2">Alumno</ion-select-option>
+            <ion-select-option value="3">Apoderado</ion-select-option>
+            <ion-select-option value="1">Profesor</ion-select-option>
+          </ion-select>
         </ion-item>
       </form>
       <br>

@@ -27,4 +27,16 @@ export const routes: Routes = [
     path: 'recuperar',
     loadComponent: () => import('./recuperar/recuperar.page').then( m => m.RecuperarPage)
   },
+  {
+    path: 'vista_profesor',
+    loadComponent: () => import('./vista_profesor/vista_profesor.page').then( m => m.VistaProfesorPage)
+  },
+  {
+    path: 'vista_alumno',
+    loadComponent: () => import('./vista_alumno/vista_alumno.page').then( m => m.VistaAlumnoPage)
+  },
+  {
+    path: 'vista_apoderado',
+    loadComponent: () => import('./vista_apoderado/vista_apoderado.page').then( m => m.VistaApoderadoPage)
+  },
 ];

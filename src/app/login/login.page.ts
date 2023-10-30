@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AnimationController, IonicModule } from '@ionic/angular';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AlertController, AnimationController, IonicModule } from '@ionic/angular';
+import { supabase } from './supabase';
+
+
 
 @Component({
   selector: 'app-login',
@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   showLoginCard: boolean = false;
   showFooter = false;
+  standAlone = true;
 
 
 
@@ -36,52 +37,35 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async ingresar() {
-    var f = this.formularioLogin.value;
-    var usuarioString = localStorage.getItem('usuario');
+  async iniciarSesion() {
+    const credentials = this.formularioLogin.value;
 
-    if (usuarioString !== null) {
-      var usuario = JSON.parse(usuarioString);
+    if (this.formularioLogin.invalid) {
+      // Manejar formulario incompleto o inválido si es necesario.
+      return;
+    }
 
-      if (usuario.correo == f.correo && usuario.contraseña == f.contraseña) {
-        console.log('Bienvenido');
-        
-        this.router.navigate(['/mostrar']);
-      } else {
-        const alert = await this.alertController.create({
-          header: 'Datos incorrectos',
-          message: 'Los datos ingresados no son válidos',
-          buttons: ['Aceptar'],
-        });
-        await alert.present(); 
-      }
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Usuario no registrado',
-        message:
-          'No se ha registrado ningún usuario en la aplicación. ¿Desea registrarse ahora?',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-            handler: () => {
-              console.log('El usuario eligió cancelar');
-            },
-          },
-          {
-            text: 'Registrarse',
-            handler: () => {
-              console.log('El usuario eligió registrarse');
-              this.router.navigate(['/registro']);
-            },
-          },
-        ],
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: credentials.correo,
+        password: credentials.contraseña
       });
-      await alert.present();
+
+      if (error) {
+        console.error('Error al iniciar sesión:', error.message);
+        // Aquí podrías mostrar un mensaje de error al usuario.
+      } else {
+        const user = data?.user; // Accede a la propiedad user desde data
+        console.log('Inicio de sesión exitoso:', user);
+        this.router.navigate(['/vista_profesor']); // Redirige al perfil o a la página principal.
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      // Manejar el error al iniciar sesión.
     }
   }
 
   async recuperarContrasena() {
-      this.router.navigate(['/recuperar']);
-    }
+    this.router.navigate(['/recuperar']);
   }
+}

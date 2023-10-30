@@ -35,7 +35,7 @@
         </ion-item>
       </form>
       <br>
-      <ion-button class="button-animation" (click)="ingresar()">
+      <ion-button class="button-animation" (click)="iniciarSesion()">
         Ingresar
       </ion-button>
       <div class="recuperar-contrasena">
@@ -44,6 +44,7 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+
 <ion-footer *ngIf="showLoginCard" class="animated-card">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
@@ -51,4 +52,3 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-

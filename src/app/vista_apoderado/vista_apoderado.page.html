@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/login']">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Menu Docente</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding ion-text-center" style="display: flex; align-items: center; height: 100vh;">
+  <ion-card style="width: 90%; max-width: 400px;">
+    <ion-card-header>
+      <ion-card-title>Selecciona una opción</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-select [(ngModel)]="selectedOption">
+        <ion-select-option value="datos">Datos del Alumno</ion-select-option>
+        <ion-select-option value="notas">Notas del Alumno</ion-select-option>
+        <ion-select-option value="asistencias">Asistencias</ion-select-option>
+        <ion-select-option value="comunicaciones">Comunicaciones</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedOption === 'datos'" class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Datos del Alumno</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Mostrar los datos del alumno -->
+      <ion-label>Nombre: {{ alumno.nombre }}</ion-label>
+      <ion-label>Rut Alumno: {{ alumno.rut }}</ion-label>
+      <ion-label>Curso: {{ alumno.curso }}</ion-label>
+      <ion-label>Profesor: {{ alumno.profesor }}</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedOption === 'notas'" class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Notas del Alumno</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Mostrar las notas y actividades aquí -->
+      <!-- Puedes recorrer un arreglo de notas y actividades y mostrarlos en esta área -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedOption === 'asistencias'" class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Asistencias del Alumno</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Mostrar las asistencias aquí -->
+      <!-- Puedes crear un cuadro de lunes a viernes y marcar las asistencias -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="selectedOption === 'comunicaciones'" class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Comunicaciones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Mostrar las comunicaciones enviadas por el profesor -->
+      <!-- Aquí puedes mostrar las comunicaciones y un botón para responder -->
+      <ion-label>Comunicación del profesor:</ion-label>
+      <!-- Agregar aquí el contenido de la comunicación -->
+      <ion-button (click)="responderComunicacion()">Responder</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
