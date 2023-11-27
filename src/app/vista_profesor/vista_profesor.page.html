@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/login']">
+      <ion-button (click)="goBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,153 +16,58 @@
 
     <ion-card-content>
       <ion-select [(ngModel)]="selectedOption">
-        <ion-select-option value="asistencia">Registrar Asistencia</ion-select-option>
-        <ion-select-option value="nota">Registrar Nota</ion-select-option>
-        <ion-select-option value="actividad">Registrar Actividad</ion-select-option>
-        <ion-select-option value="comunicacion">Registrar Comunicación</ion-select-option>
+        <ion-select-option value="asistencia">Generar Asistencia</ion-select-option>
+        <ion-select-option value="mostrarAsistencia">Mostar Asistencia</ion-select-option>
       </ion-select>
     </ion-card-content>
   </ion-card>
 
   <ion-card *ngIf="selectedOption === 'asistencia'" class="ion-text-center">
     <ion-card-header>
-      <ion-card-title>Registrar Asistencia</ion-card-title>
+      <ion-card-title>Generar Asistencia</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form>
         <ion-item>
-          <ion-label position="stacked">Nombre: </ion-label>
-          <ion-input type="text" [(ngModel)]="alumno"></ion-input>
+          <ion-label position="stacked">Nombre de la Asignatura:</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreAsignatura" name="nombreAsignatura" aria-label="Nombre de la Asignatura"></ion-input>
         </ion-item>
-  
+      
         <ion-item>
-          <ion-label position="stacked">RUT del Alumno: </ion-label>
-          <ion-input type="text" [(ngModel)]="rutAlumno"></ion-input>
+          <ion-label position="stacked">Cod Asignatura:</ion-label>
+          <ion-input type="number" [(ngModel)]="codAsignatura" name="codAsignatura" aria-label="Cod Asignatura"></ion-input>
         </ion-item>
-  
         <ion-item>
-          <ion-label position="stacked">Curso: </ion-label>
-          <ion-input type="text" [(ngModel)]="curso"></ion-input>
+          <ion-label position="stacked">Fecha: </ion-label>
+          <ion-input type="date" [(ngModel)]="fecha" name="fecha" label="Fecha"></ion-input>
         </ion-item>
-  
-        <ion-item>
-          <ion-label>Asistencia: </ion-label>
-          <ion-select [(ngModel)]="estadoAsistencia">
-            <ion-select-option value="presente">Presente</ion-select-option>
-            <ion-select-option value="ausente">Ausente</ion-select-option>
-          </ion-select>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="stacked">Día: </ion-label>
-          <ion-input type="date" [(ngModel)]="dia"></ion-input>
-        </ion-item>
-  
-        <ion-button expand="full" (click)="registrarAsistencia()">Guardar</ion-button>
+        
+        <ion-button expand="full" (click)="registrarAsistencia()">Generar Codigo QR</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="selectedOption === 'nota'" class="ion-text-center">
+  <ion-card *ngIf="selectedOption === 'mostrarAsistencia'" class="ion-text-center">
     <ion-card-header>
-      <ion-card-title>Registrar Nota</ion-card-title>
+      <ion-card-title>Mostar Asistencia</ion-card-title>
     </ion-card-header>
-  
     <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Alumno: </ion-label>
-        <ion-input type="text" [(ngModel)]="alumno"></ion-input>
-      </ion-item>
+      <form>
+        <ion-item>
+          <ion-label position="stacked">Fecha: </ion-label>
+          <ion-input type="date" [(ngModel)]="fecha" name="fecha" label="Fecha"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="mostrarAsistencia()">Mostrar Asistencia</ion-button>
+      </form>
   
-      <ion-item>
-        <ion-label position="stacked">Rut del Alumno: </ion-label>
-        <ion-input type="text" [(ngModel)]="rutAlumno"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Curso: </ion-label>
-        <ion-input type="text" [(ngModel)]="curso"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Actividad: </ion-label>
-        <ion-input type="text" [(ngModel)]="actividad"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Nota: </ion-label>
-        <ion-input type="number" [(ngModel)]="nota"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Fecha: </ion-label>
-        <ion-input type="date" [(ngModel)]="fecha"></ion-input>
-      </ion-item>
-  
-      <ion-button expand="full" (click)="registrarNota()">Guardar</ion-button>
+      <!-- Bloque para mostrar las asistencias -->
+      <ion-list *ngIf="asistencias.length > 0">
+        <ion-item *ngFor="let asistencia of asistencias">
+          <!-- Muestra la asignatura y la fecha -->
+          <ion-label>{{ asistencia.nombre_asignatura }} - {{ asistencia.fecha }}</ion-label>
+          <!-- Puedes agregar más etiquetas según los campos que quieras mostrar -->
+        </ion-item>
+      </ion-list>
+      <p *ngIf="asistencias.length === 0">No hay asistencias registradas para la fecha seleccionada.</p>
     </ion-card-content>
   </ion-card>
-  
-
-  <ion-card *ngIf="selectedOption === 'actividad'" class="ion-text-center">
-    <ion-card-header>
-      <ion-card-title>Registrar Actividad</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Nombre del Alumno: </ion-label>
-        <ion-input type="text" [(ngModel)]="alumno"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">RUT del Alumno: </ion-label>
-        <ion-input type="text" [(ngModel)]="rutAlumno"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Curso: </ion-label>
-        <ion-input type="text" [(ngModel)]="curso"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Fecha: </ion-label>
-        <ion-input type="date" [(ngModel)]="fecha"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Actividad: </ion-label>
-        <ion-textarea rows="4" [(ngModel)]="actividad"></ion-textarea>
-      </ion-item>
-  
-      <ion-button expand="full" (click)="registrarActividad()">Guardar Actividad</ion-button>
-    </ion-card-content>
-  </ion-card>
-  
-
-  <ion-card *ngIf="selectedOption === 'comunicacion'">
-    <ion-card-header>
-      <ion-card-title>Registrar Comunicación</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">Rut del Alumno: </ion-label>
-        <ion-input type="text" [(ngModel)]="rutAlumno"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Mensaje: </ion-label>
-        <ion-textarea [(ngModel)]="mensaje" rows="4"></ion-textarea>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="stacked">Fecha de comunicacion: </ion-label>
-        <ion-input type="date" [(ngModel)]="fecha"></ion-input>
-      </ion-item>
-      
-      <ion-button expand="full" (click)="registrarComunicacion()">Enviar Comunicacion</ion-button>
-    </ion-card-content>
-  </ion-card>
-  
-  

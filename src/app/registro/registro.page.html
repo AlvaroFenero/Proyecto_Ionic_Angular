@@ -25,10 +25,6 @@
           <ion-input formControlName="nombre" type="email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Apellido: </ion-label>
-          <ion-input formControlName="apellido"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label class="floating" position="floating">Correo: </ion-label>
           <ion-input formControlName="correo"></ion-input>
         </ion-item>
@@ -43,9 +39,8 @@
         <ion-item>
           <ion-label class="floating" position="floating">Tipo Usuario</ion-label>
           <ion-select formControlName="tipo_usuario">
-            <ion-select-option value="2">Alumno</ion-select-option>
-            <ion-select-option value="3">Apoderado</ion-select-option>
-            <ion-select-option value="1">Profesor</ion-select-option>
+            <ion-select-option value="Alumno">Alumno</ion-select-option>
+            <ion-select-option value="Profesor">Profesor</ion-select-option>
           </ion-select>
         </ion-item>
       </form>

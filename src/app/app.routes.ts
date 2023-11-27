@@ -20,10 +20,6 @@ export const routes: Routes = [
     loadComponent: () => import('./inicio/inicio.page').then( m => m.InicioPage)
   },
   {
-    path: 'mostrar',
-    loadComponent: () => import('./mostrar/mostrar.page').then( m => m.MostrarPage)
-  },
-  {
     path: 'recuperar',
     loadComponent: () => import('./recuperar/recuperar.page').then( m => m.RecuperarPage)
   },
@@ -34,9 +30,5 @@ export const routes: Routes = [
   {
     path: 'vista_alumno',
     loadComponent: () => import('./vista_alumno/vista_alumno.page').then( m => m.VistaAlumnoPage)
-  },
-  {
-    path: 'vista_apoderado',
-    loadComponent: () => import('./vista_apoderado/vista_apoderado.page').then( m => m.VistaApoderadoPage)
   },
 ];

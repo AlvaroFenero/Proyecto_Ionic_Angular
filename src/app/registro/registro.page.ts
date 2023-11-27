@@ -20,7 +20,6 @@ export class RegistroPage {
     this.formularioRegistro = this.formBuilder.group({
       rut: ['', Validators.required],
       nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       contraseña: ['', Validators.required],
       confirmacionContraseña: ['', Validators.required],
@@ -40,7 +39,6 @@ export class RegistroPage {
       const datosAInsertar = {
         rut: f.rut,
         nombre: f.nombre,
-        apellido: f.apellido,
         correo: f.correo,
         contraseña: f.contraseña,
         tipo_usuario: f.tipo_usuario,

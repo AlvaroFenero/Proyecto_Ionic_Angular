@@ -12,12 +12,16 @@ import { IonicModule } from '@ionic/angular';
 })
 export class VistaAlumnoPage implements OnInit {
   selectedOption: string;
+  fecha: string = ''; // Asegúrate de inicializarla con un valor por defecto o deja que sea inicializada dinámicamente
 
   constructor() {
-    this.selectedOption = 'notas';
-   }
+    this.selectedOption = 'mostrarAsistencia';
+  }
 
   ngOnInit() {
   }
 
+  mostrarAsistencia() {
+    // Agrega la lógica necesaria para mostrar la asistencia
+  }
 }

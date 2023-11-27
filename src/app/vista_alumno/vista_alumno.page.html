@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
     <ion-title>Menu Alumno</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,29 +15,31 @@
 
     <ion-card-content>
       <ion-select [(ngModel)]="selectedOption">
-        <ion-select-option value="notas">Ver Notas</ion-select-option>
-        <ion-select-option value="asistencia">Ver Asistencia</ion-select-option>
+        <ion-select-option value="EscanearQr">Registar Asistencia</ion-select-option>
+        <ion-select-option value="mostrarAsistencia">Ver Asistencia</ion-select-option>
       </ion-select>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="selectedOption === 'notas'" class="ion-text-center">
+  <ion-card *ngIf="selectedOption === 'EscanearQr'" class="ion-text-center">
     <ion-card-header>
-      <ion-card-title>Notas del Alumno</ion-card-title>
+      <ion-card-title>Escanear codigo QR</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Mostrar las notas y actividades aquí -->
-      <!-- Puedes recorrer un arreglo de notas y actividades y mostrarlos en esta área -->
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="selectedOption === 'asistencia'" class="ion-text-center">
-    <ion-card-header>
-      <ion-card-title>Asistencias del Alumno</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <!-- Mostrar las asistencias aquí -->
-      <!-- Puedes crear un cuadro de lunes a viernes y marcar las asistencias -->
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<ion-card *ngIf="selectedOption === 'mostrarAsistencia'" class="ion-text-center">
+  <ion-card-header>
+    <ion-card-title>Mostar Asistencia</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+<form>
+  <ion-item>
+    <ion-label position="stacked">Fecha:</ion-label>
+    <ion-input type="date" [(ngModel)]="fecha" [ngModelOptions]="{standalone: true}"></ion-input>
+  </ion-item>
+</form>
+  </ion-card-content>
+</ion-card>
