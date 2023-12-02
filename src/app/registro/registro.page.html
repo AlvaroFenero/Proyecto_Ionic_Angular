@@ -9,45 +9,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-card class="animated-card">
     <ion-card-header>
       <ion-card-title>Registro</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioRegistro">
+      <form (ngSubmit)="guardar()">
         <ion-item>
-          <ion-label class="floating" position="floating">Rut: </ion-label>
-          <ion-input formControlName="rut"></ion-input>
+          <ion-label class="floating">Rut:</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.rut" name="rut" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Nombre: </ion-label>
-          <ion-input formControlName="nombre" type="email"></ion-input>
+          <ion-label class="floating">Nombre:</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.nombre" name="nombre" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Correo: </ion-label>
-          <ion-input formControlName="correo"></ion-input>
+          <ion-label class="floating">Correo:</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.correo" name="correo" type="email" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Contraseña</ion-label>
-          <ion-input formControlName="contraseña" type="password"></ion-input>
+          <ion-label class="floating">Contraseña:</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.contrasena" name="contrasena" type="password" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="floating" position="floating">Confirmación de Contraseña</ion-label>
-          <ion-input formControlName="confirmacionContraseña" type="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label class="floating" position="floating">Tipo Usuario</ion-label>
-          <ion-select formControlName="tipo_usuario">
+          <ion-label class="floating">Tipo Usuario:</ion-label>
+          <ion-select [(ngModel)]="userLoginModal.tipo_usuario" name="tipo_usuario" required>
             <ion-select-option value="Alumno">Alumno</ion-select-option>
             <ion-select-option value="Profesor">Profesor</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-button expand="full" type="submit" class="button-animation">Registrarse</ion-button>
       </form>
-      <br>
-      <ion-button class="button-animation" (click)="guardar()">
-        Registrarse
-      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

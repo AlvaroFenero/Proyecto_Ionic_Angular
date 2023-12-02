@@ -3,58 +3,68 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { supabase } from './supabase';
+import { Injectable } from "@angular/core";
+import { UserModel } from '../models/UserModel';
+import { Subscription } from '@supabase/supabase-js';
+import { RegistroService } from 'src/service/registro.service';
+import { HttpClientModule } from '@angular/common/http';
 
+
+
+@Injectable({ 
+  providedIn: 'root' 
+})
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, RouterLink]
-})
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterLink],
+  providers: [UserService]})
+  
 export class RegistroPage {
-  formularioRegistro: FormGroup;
+  userLoginModal: UserModel = {
+    rut: '',
+    nombre: '',
+    correo: '',
+    contrasena: '',
+    tipo_usuario: ''
+  };
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.formularioRegistro = this.formBuilder.group({
-      rut: ['', Validators.required],
-      nombre: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      contraseña: ['', Validators.required],
-      confirmacionContraseña: ['', Validators.required],
-      tipo_usuario: ['', Validators.required]
-    });
-  }
-  async guardar() {
-    const f = this.formularioRegistro.value;
- 
-    if (this.formularioRegistro.invalid) {
-      // Maneja los datos del formulario incompletos o incorrectos si es necesario.
-      return;
-    }
- 
+
+  public userExist?: UserModel;
+  public userList$!: Subscription;
+  public userList: UserModel[] = [];
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private registroService: RegistroService) {}
+
+  async registrarUsuario() {
     try {
-      // Define los datos a insertar en la tabla de la base de datos.
-      const datosAInsertar = {
-        rut: f.rut,
-        nombre: f.nombre,
-        correo: f.correo,
-        contraseña: f.contraseña,
-        tipo_usuario: f.tipo_usuario,
-      };
- 
-      // Realiza la inserción en la tabla 'mi_tabla' de la base de datos.
-      const { data, error } = await supabase.from('Usuario').upsert([datosAInsertar]);
- 
+      // Lógica de validación del formulario aquí si es necesario
+  
+      // Llamada al servicio de registro para crear un nuevo usuario en Supabase
+      const { user, error } = await this.registroService.registrarUsuario(
+        this.userLoginModal.correo,
+        this.userLoginModal.contrasena
+      );
+  
       if (error) {
-        console.error('Error al insertar datos:', error.message);
+        console.error('Error al registrar usuario:', error.message);
+        // Puedes mostrar un mensaje de error al usuario si lo deseas
       } else {
-        console.log('Datos insertados correctamente:', data);
+        console.log('Usuario registrado correctamente:', user);
+        // Puedes redirigir al usuario a otra página después del registro si es necesario
         this.router.navigate(['/login']);
       }
     } catch (error) {
-      console.error('Error al insertar datos:', error);
+      console.error('Error al registrar usuario:', error);
+      // Manejo de errores generales
     }
+  }
+  
+  guardar() {
+    // Implementa la lógica de guardado aquí
+    console.log('Función guardar() ejecutada');
   }
 }
